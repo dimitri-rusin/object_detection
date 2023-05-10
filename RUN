@@ -1,0 +1,6 @@
+#!/usr/bin/env fish
+
+true
+
+and conda activate ml_service
+and ipython3 ultra.py
