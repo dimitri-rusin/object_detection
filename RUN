@@ -1,6 +1,12 @@
-#!/usr/bin/env fish
+#!/usr/bin/env bash
 
-true
+# Stop if one of the below line commands
+# results in an error.
+set -e
 
-and conda activate ml_service
-and ipython3 ultra.py
+# Without this line, we might get an error like:
+# CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
+. ~/anaconda3/etc/profile.d/conda.sh
+
+conda activate ml_service
+ipython3 api.py

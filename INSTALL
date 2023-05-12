@@ -1,11 +1,18 @@
-#!/usr/bin/env fish
+#!/usr/bin/env bash
 
-true
-and conda activate base
+# Stop if one of the below line commands
+# results in an error.
+set -e
 
-and rm -rf (conda info --base)/envs/ml_service/
-and conda env remove --name ml_service
+# Without this line, we might get an error like:
+# CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
+. ~/anaconda3/etc/profile.d/conda.sh
 
-and conda create --yes --name ml_service python
-and conda activate ml_service
-and pip install --upgrade --requirement requirements.txt
+conda activate base
+
+rm -rf $(conda info --base)/envs/object_detection/
+conda env remove --name object_detection
+
+conda create --yes --name object_detection python
+conda activate object_detection
+pip install --upgrade --requirement requirements.txt
