@@ -8,5 +8,5 @@ set -e
 # CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
 . ~/anaconda3/etc/profile.d/conda.sh
 
-conda activate ml_service
+conda activate object_detection
 ipython3 api.py
