@@ -25,7 +25,7 @@ def get_traces_handle():
     print(results)
 
     # Get all files in the current directory
-    files = glob.glob('./**/*', recursive=True)
+    files = glob.glob('./runs/**/*', recursive=True)
 
     # Find the most recently modified file
     latest_file = max(files, key=os.path.getmtime)
