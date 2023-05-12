@@ -1,4 +1,3 @@
-from info import info
 import flask
 import glob
 import os
@@ -23,7 +22,7 @@ def get_traces_handle():
     # At this point we assume, since no exception has been raised by model.predict(),
     # that the function was successful and the desired file is the most recently
     # modified regular file in the current directory.
-    info(results)
+    print(results)
 
     # Get all files in the current directory
     files = glob.glob('./**/*', recursive=True)
@@ -31,7 +30,7 @@ def get_traces_handle():
     # Find the most recently modified file
     latest_file = max(files, key=os.path.getmtime)
 
-    info(latest_file)
+    print(latest_file)
 
     # Open the file in binary mode and read it
     with open(latest_file, 'rb') as f:
@@ -50,7 +49,7 @@ def get_traces_handle():
   except Exception as exception:
     flask_response = flask.make_response(str(exception))
     flask_response.headers['Content-Type'] = 'text/plain; charset=utf-8'
-    info(flask_response)
+    print(flask_response)
     return flask_response
 
 @app.after_request
