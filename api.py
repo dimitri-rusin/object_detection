@@ -1,6 +1,7 @@
 import flask
 import glob
 import os
+import ssl
 import ultralytics
 
 app = flask.Flask(__name__)
@@ -59,4 +60,14 @@ def add_cors_headers(response):
   return response
 
 if __name__ == '__main__':
-  app.run(host='0.0.0.0', port=8080, debug=True, use_reloader=False)
+  # Enable HTTPS using self-signed certificates
+  context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+  context.load_cert_chain('certificate.crt', 'private.key')
+
+  app.run(
+    host='0.0.0.0',
+    port=8080,
+    debug=True,
+    use_reloader=False,
+    ssl_context=context,
+  )
