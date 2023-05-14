@@ -15,4 +15,6 @@ conda env remove --name object_detection
 
 conda create --yes --name object_detection python
 conda activate object_detection
+
+conda install -c conda-forge watchdog
 pip install --upgrade --requirement requirements.txt
