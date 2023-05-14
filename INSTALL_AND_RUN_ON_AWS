@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-# Stop if one of the below line commands
-# results in an error.
+# Stop if one of the below line commands results in an error.
 set -e
 
 wget -O Anaconda3.sh https://repo.anaconda.com/archive/Anaconda3-2023.03-1-Linux-x86_64.sh
@@ -9,18 +8,12 @@ chmod +x Anaconda3.sh
 rm -rf ~/anaconda3
 bash Anaconda3.sh -b
 echo 'export PATH="$HOME/anaconda3/bin:$PATH"' >> ~/.bashrc
-source ~/.bashrc
-
-sudo apt update
-sudo apt install -y libgl1-mesa-glx
+. ~/.bashrc
 
 git clone https://github.com/Habimm/object_detection.git
 cd object_detection/
-./INSTALL
+. INSTALL
 
-# pkill -f "bash ./RUN"
-#
-lsof -ti :8080 | xargs kill
-nohup bash ./RUN > output.log 2>&1 &
-ps aux | grep "bash ./RUN"
-# ipython3 process goes on independently
+pkill -f "python api.py"
+nohup python api.py > output.log 2>&1 &
+ps aux | grep "python api.py"
