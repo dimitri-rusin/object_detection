@@ -62,10 +62,10 @@ def add_cors_headers(response):
 if __name__ == '__main__':
   # Enable HTTPS using self-signed certificates
   context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-  context.load_cert_chain('certificate.crt', 'private.key')
+  context.load_cert_chain('localhost.pem', 'localhost-key.pem')
 
   app.run(
-    host='0.0.0.0',
+    host='localhost',
     port=8080,
     debug=True,
     use_reloader=False,
