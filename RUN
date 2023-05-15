@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Stop if one of the below line commands results in an error.
+set -e
+
+# Run the web service,
+# in such a way that it continues running,
+# even after the SSH connection terminates.
+pkill -f "python api.py"
+. ~/anaconda3/etc/profile.d/conda.sh
+conda activate object_detection
+nohup python api.py > output.log 2>&1 &
+ps aux | grep "python api.py"
+cat output.log

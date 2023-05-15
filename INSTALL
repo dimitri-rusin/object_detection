@@ -29,10 +29,3 @@ pip install --upgrade --requirement requirements.txt
 # (to which we copied them using scp
 # after creating them with mkcert)
 cp ../{certificate,key}.pem .
-
-# Run the web service,
-# in such a way that it continues running,
-# even after the SSH connection terminates.
-pkill -f "python api.py"
-nohup python api.py > output.log 2>&1 &
-ps aux | grep "python api.py"
