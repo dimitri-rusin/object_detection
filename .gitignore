@@ -1,2 +1,6 @@
-datasets
+*.pem
+.terraform/
+mkcert*
+received_image.jpg
 runs
+yolov8n.pt

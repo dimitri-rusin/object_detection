@@ -3,21 +3,36 @@
 # Stop if one of the below line commands results in an error.
 set -e
 
+sudo apt update
+sudo apt install -y libgl1-mesa-glx
+
+# Install Anaconda3
 wget -O Anaconda3.sh https://repo.anaconda.com/archive/Anaconda3-2023.03-1-Linux-x86_64.sh
 chmod +x Anaconda3.sh
 rm -rf ~/anaconda3
 bash Anaconda3.sh -b
 echo 'export PATH="$HOME/anaconda3/bin:$PATH"' >> ~/.bashrc
 . ~/.bashrc
-
-git clone https://github.com/Habimm/object_detection.git
-cd object_detection/
-. INSTALL
-
-mv /home/ubuntu/certificate.pem /home/ubuntu/key.pem .
-
-pkill -f "python api.py"
 . ~/anaconda3/etc/profile.d/conda.sh
+
+# Delete a priorly setup Anaconda3 environment
+conda activate base
+rm -rf $(conda info --base)/envs/object_detection/
+conda env remove --name object_detection
+
+# Create a fresh Anaconda3 environment
+conda create --yes --name object_detection python
 conda activate object_detection
+pip install --upgrade --requirement requirements.txt
+
+# Copy the SSL certificate + key from the home directory,
+# (to which we copied them using scp
+# after creating them with mkcert)
+cp ../{certificate,key}.pem .
+
+# Run the web service,
+# in such a way that it continues running,
+# even after the SSH connection terminates.
+pkill -f "python api.py"
 nohup python api.py > output.log 2>&1 &
 ps aux | grep "python api.py"
