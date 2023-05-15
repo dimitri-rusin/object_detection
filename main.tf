@@ -9,6 +9,10 @@ terraform {
   required_version = ">= 1.2.0"
 }
 
+provider "aws" {
+  region = "us-west-2" # Oregon
+}
+
 resource "aws_security_group" "app_sg" {
   name        = "app_sg"
   description = "Allow SSH and TCP traffic on port 8080"

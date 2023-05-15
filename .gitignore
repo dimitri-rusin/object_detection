@@ -1,4 +1,5 @@
 *.pem
+.env
 .terraform/
 mkcert*
 received_image.jpg
