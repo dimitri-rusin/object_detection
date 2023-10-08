@@ -22,8 +22,13 @@ def get_traces_handle():
     # Get all files in the current directory
     files = glob.glob('./runs/**/*', recursive=True)
 
+    # Filter out directories
+    files = [f for f in files if os.path.isfile(f)]
+
     # Find the most recently modified file
     latest_file = max(files, key=os.path.getmtime)
+
+    print('latest_file:', latest_file)
 
     # Open the file in binary mode and read it
     with open(latest_file, 'rb') as f:
