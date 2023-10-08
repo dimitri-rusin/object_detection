@@ -6,9 +6,9 @@ set -e
 # Run the web service,
 # in such a way that it continues running,
 # even after the SSH connection terminates.
-pkill -f "python api.py"
+pkill -f "python object_detection/api.py"
 . ~/anaconda3/etc/profile.d/conda.sh
 conda activate object_detection
-nohup python api.py > output.log 2>&1 &
-ps aux | grep "python api.py"
-cat output.log
+nohup python object_detection/api.py > object_detection/output.log 2>&1 &
+ps aux | grep "python object_detection/api.py"
+cat object_detection/output.log
