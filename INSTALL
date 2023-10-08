@@ -21,7 +21,7 @@ rm -rf $(conda info --base)/envs/object_detection/
 conda env remove --name object_detection
 
 # Create a fresh Anaconda3 environment
-conda create --yes --name object_detection python
+conda create --yes --name object_detection python==3.11
 conda activate object_detection
 pip install --upgrade --requirement requirements.txt
 
